@@ -1,0 +1,74 @@
+version: '3.4'
+
+services:
+  northwind.product.v1:
+    image: ndviet/northwind.product:v1
+    build:
+      context: .
+      dockerfile: Northwind.Services.Product/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "6061:80"
+
+  northwind.order.v1:
+    image: ndviet/northwind.order:v1
+    build:
+      context: .
+      dockerfile: Northwind.Services.Order/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "7071:80"
+
+  northwind.address.v1:
+    image: ndviet/northwind.address:v1
+    build:
+      context: .
+      dockerfile: Northwind.Services.Address/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8081:80"
+
+  northwind.address.v2:
+    image: ndviet/northwind.address:v2
+    build:
+      context: .
+      dockerfile: Northwind.Services.Address.v2/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8082:80"
+
+  northwind.address.v3:
+    image: ndviet/northwind.address:v3
+    build:
+      context: .
+      dockerfile: Northwind.Services.Address.v3/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8083:80"
+
+  northwind.payment.v1:
+    image: ndviet/northwind.payment:v1
+    build:
+      context: .
+      dockerfile: Northwind.Services.Payment/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9091:80"
+
+  northwind.payment.v2:
+    image: ndviet/northwind.payment:v2
+    build:
+      context: .
+      dockerfile: Northwind.Services.Payment.v2/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9092:80"
+
+  
