@@ -1,26 +1,58 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: default
   name: northwind
   annotations: 
-    kubernetes.io/ingress.class: northwind
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "Access-Control-Allow-Origin: * ";
+      more_set_headers "Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With,DeviceName,DeviceOS,Location";
+      proxy_set_header X-Forwarded-For $http_x_forwarded_for;
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    nginx.ingress.kubernetes.io/cors-allow-headers: Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With,X-Forwarded-For,DeviceName,DeviceOS,Location
+    nginx.ingress.kubernetes.io/cors-allow-methods: PUT, GET, POST, OPTIONS
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: matrix.7e32334e0e69428fba45.westus2.aksapp.io
+    - host: demoesignapp.rdp.local
       http:
         paths:
-          - path: /
-            backend:
-              serviceName: product
-              servicePort: 80
-          - path: /products
-            backend:
-              serviceName: product
-              servicePort: 80
-          - path: /orders
-            backend:
-              serviceName: order
-              servicePort: 80
+        - backend:
+            service:
+              name: product
+              port:
+                number: 80
+          path: /(.*)
+          pathType: ImplementationSpecific
+        - backend:
+            service:
+              name: product
+              port:
+                number: 80
+          path: /products/(.*)
+          pathType: ImplementationSpecific
+        - backend:
+            service:
+              name: order
+              port:
+                number: 80
+          path: /orders/(.*)
+          pathType: ImplementationSpecific
+          #- path: /istio/(.*)
+          #  backend:
+          #    serviceName: product
+          #    servicePort: 80
+          #  pathType: ImplementationSpecific
+          #- path: /istio/products/(.*)
+          #  pathType: ImplementationSpecific
+          #  backend:
+          #    serviceName: product
+          #    servicePort: 80
+          #- path: /istio/orders/(.*)
+          #  pathType: ImplementationSpecific
+          #  backend:
+          #    serviceName: order
+          #    servicePort: 80

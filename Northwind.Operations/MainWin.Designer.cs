@@ -740,7 +740,7 @@
             this.txtIstioPath.Name = "txtIstioPath";
             this.txtIstioPath.Size = new System.Drawing.Size(952, 20);
             this.txtIstioPath.TabIndex = 0;
-            this.txtIstioPath.Text = "C:\\istio\\istio-1.0.1-win\\istio-1.0.1";
+            this.txtIstioPath.Text = "C:\\Users\\ndviet\\Downloads\\istio-1.17.0-win\\istio-1.17.0";
             // 
             // gbKubeObjects
             // 
@@ -1014,6 +1014,7 @@
             this.lstObjects.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstObjects.FullRowSelect = true;
             this.lstObjects.GridLines = true;
+            this.lstObjects.HideSelection = false;
             this.lstObjects.Location = new System.Drawing.Point(3, 28);
             this.lstObjects.Name = "lstObjects";
             this.lstObjects.Size = new System.Drawing.Size(958, 554);

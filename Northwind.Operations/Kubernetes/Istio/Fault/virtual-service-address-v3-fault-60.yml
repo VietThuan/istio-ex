@@ -1,4 +1,4 @@
-﻿apiVersion: networking.istio.io/v1alpha3
+﻿apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: address
@@ -8,7 +8,7 @@ spec:
   http:
     - fault:
         abort:
-          percent: 60
+          percentage: 60
           httpStatus: 400
       route:
         - destination:
